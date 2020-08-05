@@ -34,8 +34,9 @@ This library is not compatible with CircuitPython and is intended to only be run
 import threading
 
 from os import path
-from busio import I2C
+from busio import I2C, SPI
 from adafruit_blinka.microcontroller.generic_linux.i2c import I2C as _I2C
+from adafruit_blinka.microcontroller.generic_linux.spi import SPI as _SPI
 
 __version__ = "0.0.0-auto.0"
 __repo__ = "https://github.com/adafruit/Adafruit_Python_Extended_Bus.git"
@@ -66,3 +67,39 @@ class ExtendedI2C(I2C):
         self._lock = threading.RLock()
 
     # pylint: enable=arguments-differ
+
+
+# pylint: disable=too-few-public-methods
+class ExtendedSPI(SPI):
+    """Extended SPI is a busio extension that allows creating a compatible
+    SPI object using the Bus ID number. The bus ID is the numbers at the end
+    of /dev/spidev#.# and you can find which SPI devices you have by typing
+    `ls /dev/spi*`"""
+
+    # pylint: disable=invalid-name, redefined-builtin
+    class Pin:
+        """Fake Pin class"""
+
+        def __init__(self, id):
+            self.id = id
+
+    # pylint: enable=invalid-name, redefined-builtin
+
+    # pylint: disable=super-init-not-called
+    def __init__(self, bus_id, chip_select):
+        self.deinit()
+
+        # Check if the file /dev/i2c-{bus_id} exists and error if not
+        if not path.exists("/dev/spidev{}.{}".format(bus_id, chip_select)):
+            raise ValueError(
+                "No device found for /dev/spidev{}.{}".format(bus_id, chip_select)
+            )
+
+        self._spi = _SPI((bus_id, chip_select))
+        # Pins aren't used in Linux, so we just use fake pins
+        self._pins = (self.Pin(0), self.Pin(0), self.Pin(0))
+
+    # pylint: enable=super-init-not-called
+
+
+# pylint: enable=too-few-public-methods
