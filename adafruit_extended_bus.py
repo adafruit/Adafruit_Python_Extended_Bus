@@ -68,6 +68,7 @@ class ExtendedI2C(I2C):
 
     # pylint: enable=arguments-differ
 
+
 # pylint: disable=too-few-public-methods
 class ExtendedSPI(SPI):
     """Extended SPI is a busio extension that allows creating a compatible
@@ -78,8 +79,10 @@ class ExtendedSPI(SPI):
     # pylint: disable=invalid-name, redefined-builtin
     class Pin:
         """Fake Pin class"""
+
         def __init__(self, id):
             self.id = id
+
     # pylint: enable=invalid-name, redefined-builtin
 
     # pylint: disable=super-init-not-called
@@ -97,4 +100,6 @@ class ExtendedSPI(SPI):
         self._pins = (self.Pin(0), self.Pin(0), self.Pin(0))
 
     # pylint: enable=super-init-not-called
+
+
 # pylint: enable=too-few-public-methods
