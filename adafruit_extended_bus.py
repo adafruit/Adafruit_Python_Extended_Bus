@@ -46,7 +46,7 @@ class ExtendedI2C(I2C):
     """Extended I2C is a busio extension that allows creating a compatible
     I2C object using the Bus ID number. The bus ID is the number at the end
     of /dev/i2c-# and you can find which I2C devices you have by typing
-    `ls /dev/i2c*`"""
+    ``ls /dev/i2c*``"""
 
     # pylint: disable=super-init-not-called
     def __init__(self, bus_id, frequency=400000):
@@ -74,7 +74,7 @@ class ExtendedSPI(SPI):
     """Extended SPI is a busio extension that allows creating a compatible
     SPI object using the Bus ID number. The bus ID is the numbers at the end
     of /dev/spidev#.# and you can find which SPI devices you have by typing
-    `ls /dev/spi*`"""
+    ``ls /dev/spi*``"""
 
     # pylint: disable=invalid-name, redefined-builtin
     class Pin:
