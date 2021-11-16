@@ -59,8 +59,8 @@ class ExtendedI2C(I2C):
         self.deinit()
 
         # Check if the file /dev/i2c-{bus_id} exists and error if not
-        if not path.exists("/dev/i2c-{}".format(bus_id)):
-            raise ValueError("No device found for /dev/i2c-{}".format(bus_id))
+        if not path.exists(F"/dev/i2c-{bus_id}"):
+            raise ValueError(F"No device found for /dev/i2c-{bus_id}")
         # Attempt to open using _I2C
         self._i2c = _I2C(bus_id, mode=_I2C.MASTER, baudrate=frequency)
 
@@ -90,9 +90,9 @@ class ExtendedSPI(SPI):
         self.deinit()
 
         # Check if the file /dev/i2c-{bus_id} exists and error if not
-        if not path.exists("/dev/spidev{}.{}".format(bus_id, chip_select)):
+        if not path.exists(F"/dev/spidev{bus_id}.{chip_select}"):
             raise ValueError(
-                "No device found for /dev/spidev{}.{}".format(bus_id, chip_select)
+                F"No device found for /dev/spidev{bus_id}.{chip_select}"
             )
 
         self._spi = _SPI((bus_id, chip_select))
