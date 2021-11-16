@@ -10,4 +10,4 @@ from adafruit_extended_bus import ExtendedI2C as I2C
 # Create library object using our Extended Bus I2C port
 i2c = I2C(1)  # Device is /dev/i2c-1
 bme280 = adafruit_bme280.Adafruit_BME280_I2C(i2c)
-print("\nTemperature: %0.1f C" % bme280.temperature)
+print(f"\nTemperature: {bme280.temperature:0.1f} C")
