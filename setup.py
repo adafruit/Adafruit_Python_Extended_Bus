@@ -44,6 +44,7 @@ setup(
         "Programming Language :: Python :: 3",
         "Programming Language :: Python :: 3.4",
         "Programming Language :: Python :: 3.5",
+        "Programming Language :: Python :: 3.7",
     ],
     # What does your project relate to?
     keywords="adafruit blinka circuitpython micropython extended_bus busio i2c spi extended "
